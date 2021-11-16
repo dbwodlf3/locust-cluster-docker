@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  locuster-cluster-test:
+    image: locust-cluster:latest
+    command : ['python', '/locust-cluster/user/scripts/my_entrypoint.py']
+    ports:
+      - 8089:8089
+    volumes:
+      - './scripts:/locust-cluster/user/scripts'

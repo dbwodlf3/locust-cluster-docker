@@ -2,13 +2,13 @@ version: '3.3'
 
 services:
   locust-cluster-master:
-    image: dbwodlf3/locust-cluster-docker:latest
-    command: /locust-cluster/scripts/master_entry.py
+    image: locust-cluster:latest
+    command: locust-cluster/scripts/master_entry.py
     deploy:
       mode: global
 
   locust-cluster-worker:
-    image: dbwodlf3/locust-cluster-docker:latest
+    image: locust-cluster:latest
     command: /locust-cluster/scripts/master_entry.py
     deploy:
       replicas: 12

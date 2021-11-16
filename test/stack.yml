@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  locust-cluster-master:
+    image: locust-cluster:latest
+    volumes:
+      - type: bind
+        source: ./scripts
+        target: /locust-cluster/user/scripts
+    command: python /locust-cluster/user/scripts/my_cluster_master_entrypoint.py
+    ports: 
+      - 9000:9000
+    deploy:
+      mode: global
+
+  locust-cluster-worker:
+    image: locust-cluster:latest
+    volumes:
+      - type: bind
+        source: ./scripts
+        target: /locust-cluster/user/scripts
+    command: python /locust-cluster/user/scripts/my_cluster_worker_entrypoint.py
+    deploy:
+      replicas: 12
