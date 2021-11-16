@@ -11,7 +11,7 @@ services:
     ports: 
       - 9000:9000
     deploy:
-      mode: global
+      replicas: 1 
 
   locust-cluster-worker:
     image: locust-cluster:latest
@@ -21,4 +21,4 @@ services:
         target: /locust-cluster/user/scripts
     command: python /locust-cluster/user/scripts/my_cluster_worker_entrypoint.py
     deploy:
-      replicas: 12
+      mode: global
