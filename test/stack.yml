@@ -8,10 +8,13 @@ services:
         source: ./scripts
         target: /locust-cluster/user/scripts
     command: python /locust-cluster/user/scripts/my_cluster_master_entrypoint.py
-    ports: 
+    ports:
       - 9000:9000
     deploy:
-      replicas: 1 
+        mode: global
+        placement:
+            constraints:
+                - node.role == manager
 
   locust-cluster-worker:
     image: locust-cluster:latest
@@ -21,4 +24,7 @@ services:
         target: /locust-cluster/user/scripts
     command: python /locust-cluster/user/scripts/my_cluster_worker_entrypoint.py
     deploy:
-      mode: global
+        mode: global
+        placement:
+            constraints:
+                - node.role == worker
